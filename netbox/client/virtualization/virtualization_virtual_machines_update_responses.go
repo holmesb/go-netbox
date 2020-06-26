@@ -24,8 +24,11 @@ import (
 	"fmt"
 	"io"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 
 	"github.com/fbreckle/go-netbox/netbox/models"
 )
@@ -44,6 +47,12 @@ func (o *VirtualizationVirtualMachinesUpdateReader) ReadResponse(response runtim
 			return nil, err
 		}
 		return result, nil
+	case 400:
+		result := NewVirtualizationVirtualMachinesUpdateBadRequest()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 
 	default:
 		return nil, runtime.NewAPIError("unknown error", response, response.Code())
@@ -80,5 +89,89 @@ func (o *VirtualizationVirtualMachinesUpdateOK) readResponse(response runtime.Cl
 		return err
 	}
 
+	return nil
+}
+
+// NewVirtualizationVirtualMachinesUpdateBadRequest creates a VirtualizationVirtualMachinesUpdateBadRequest with default headers values
+func NewVirtualizationVirtualMachinesUpdateBadRequest() *VirtualizationVirtualMachinesUpdateBadRequest {
+	return &VirtualizationVirtualMachinesUpdateBadRequest{}
+}
+
+/*VirtualizationVirtualMachinesUpdateBadRequest handles this case with default header values.
+
+test
+*/
+type VirtualizationVirtualMachinesUpdateBadRequest struct {
+	Payload *VirtualizationVirtualMachinesUpdateBadRequestBody
+}
+
+func (o *VirtualizationVirtualMachinesUpdateBadRequest) Error() string {
+	return fmt.Sprintf("[PUT /virtualization/virtual-machines/{id}/][%d] virtualizationVirtualMachinesUpdateBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *VirtualizationVirtualMachinesUpdateBadRequest) GetPayload() *VirtualizationVirtualMachinesUpdateBadRequestBody {
+	return o.Payload
+}
+
+func (o *VirtualizationVirtualMachinesUpdateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(VirtualizationVirtualMachinesUpdateBadRequestBody)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+/*VirtualizationVirtualMachinesUpdateBadRequestBody virtualization virtual machines update bad request body
+swagger:model VirtualizationVirtualMachinesUpdateBadRequestBody
+*/
+type VirtualizationVirtualMachinesUpdateBadRequestBody struct {
+
+	// error message
+	// Required: true
+	ErrorMessage *string `json:"errorMessage"`
+}
+
+// Validate validates this virtualization virtual machines update bad request body
+func (o *VirtualizationVirtualMachinesUpdateBadRequestBody) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.validateErrorMessage(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *VirtualizationVirtualMachinesUpdateBadRequestBody) validateErrorMessage(formats strfmt.Registry) error {
+
+	if err := validate.Required("virtualizationVirtualMachinesUpdateBadRequest"+"."+"errorMessage", "body", o.ErrorMessage); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (o *VirtualizationVirtualMachinesUpdateBadRequestBody) MarshalBinary() ([]byte, error) {
+	if o == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(o)
+}
+
+// UnmarshalBinary interface implementation
+func (o *VirtualizationVirtualMachinesUpdateBadRequestBody) UnmarshalBinary(b []byte) error {
+	var res VirtualizationVirtualMachinesUpdateBadRequestBody
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*o = res
 	return nil
 }

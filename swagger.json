@@ -29787,6 +29787,20 @@
             "schema": {
               "$ref": "#/definitions/VirtualMachineWithConfigContext"
             }
+          },
+          "400": {
+            "description": "test",
+            "schema": {
+              "required": [
+                "errorMessage"
+              ],
+              "type": "object",
+              "properties": {
+                "errorMessage": {
+                  "type": "string"
+                }
+              }
+            }
           }
         },
         "tags": [
