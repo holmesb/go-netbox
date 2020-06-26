@@ -29791,10 +29791,8 @@
           "400": {
             "description": "test",
             "schema": {
-              "required": [
-                "errorMessage"
-              ],
               "type": "object",
+              "additionalProperties": true,
               "properties": {
                 "errorMessage": {
                   "type": "string"

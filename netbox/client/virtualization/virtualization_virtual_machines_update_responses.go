@@ -21,14 +21,13 @@ package virtualization
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
-	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
-	"github.com/go-openapi/validate"
 
 	"github.com/fbreckle/go-netbox/netbox/models"
 )
@@ -131,30 +130,88 @@ swagger:model VirtualizationVirtualMachinesUpdateBadRequestBody
 type VirtualizationVirtualMachinesUpdateBadRequestBody struct {
 
 	// error message
-	// Required: true
-	ErrorMessage *string `json:"errorMessage"`
+	ErrorMessage string `json:"errorMessage,omitempty"`
+
+	// virtualization virtual machines update bad request body additional properties
+	VirtualizationVirtualMachinesUpdateBadRequestBodyAdditionalProperties map[string]interface{} `json:"-"`
+}
+
+// UnmarshalJSON unmarshals this object with additional properties from JSON
+func (o *VirtualizationVirtualMachinesUpdateBadRequestBody) UnmarshalJSON(data []byte) error {
+	// stage 1, bind the properties
+	var stage1 struct {
+
+		// error message
+		ErrorMessage string `json:"errorMessage,omitempty"`
+	}
+	if err := json.Unmarshal(data, &stage1); err != nil {
+		return err
+	}
+	var rcv VirtualizationVirtualMachinesUpdateBadRequestBody
+
+	rcv.ErrorMessage = stage1.ErrorMessage
+	*o = rcv
+
+	// stage 2, remove properties and add to map
+	stage2 := make(map[string]json.RawMessage)
+	if err := json.Unmarshal(data, &stage2); err != nil {
+		return err
+	}
+
+	delete(stage2, "errorMessage")
+	// stage 3, add additional properties values
+	if len(stage2) > 0 {
+		result := make(map[string]interface{})
+		for k, v := range stage2 {
+			var toadd interface{}
+			if err := json.Unmarshal(v, &toadd); err != nil {
+				return err
+			}
+			result[k] = toadd
+		}
+		o.VirtualizationVirtualMachinesUpdateBadRequestBodyAdditionalProperties = result
+	}
+
+	return nil
+}
+
+// MarshalJSON marshals this object with additional properties into a JSON object
+func (o VirtualizationVirtualMachinesUpdateBadRequestBody) MarshalJSON() ([]byte, error) {
+	var stage1 struct {
+
+		// error message
+		ErrorMessage string `json:"errorMessage,omitempty"`
+	}
+
+	stage1.ErrorMessage = o.ErrorMessage
+
+	// make JSON object for known properties
+	props, err := json.Marshal(stage1)
+	if err != nil {
+		return nil, err
+	}
+
+	if len(o.VirtualizationVirtualMachinesUpdateBadRequestBodyAdditionalProperties) == 0 {
+		return props, nil
+	}
+
+	// make JSON object for the additional properties
+	additional, err := json.Marshal(o.VirtualizationVirtualMachinesUpdateBadRequestBodyAdditionalProperties)
+	if err != nil {
+		return nil, err
+	}
+
+	if len(props) < 3 {
+		return additional, nil
+	}
+
+	// concatenate the 2 objects
+	props[len(props)-1] = ','
+	return append(props, additional[1:]...), nil
 }
 
 // Validate validates this virtualization virtual machines update bad request body
 func (o *VirtualizationVirtualMachinesUpdateBadRequestBody) Validate(formats strfmt.Registry) error {
-	var res []error
-
-	if err := o.validateErrorMessage(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (o *VirtualizationVirtualMachinesUpdateBadRequestBody) validateErrorMessage(formats strfmt.Registry) error {
-
-	if err := validate.Required("virtualizationVirtualMachinesUpdateBadRequest"+"."+"errorMessage", "body", o.ErrorMessage); err != nil {
-		return err
-	}
-
 	return nil
 }
 
