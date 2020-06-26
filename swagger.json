@@ -32,6 +32,15 @@
       "Bearer": []
     }
   ],
+  "responses": {
+    "defaultResponse": {
+      "description": "default http response, usually error",
+      "schema": {
+        "type": "object",
+        "additionalProperties": true
+      }
+    }
+  },
   "paths": {
     "/circuits/circuit-terminations/": {
       "get": {
@@ -29788,17 +29797,8 @@
               "$ref": "#/definitions/VirtualMachineWithConfigContext"
             }
           },
-          "400": {
-            "description": "test",
-            "schema": {
-              "type": "object",
-              "additionalProperties": true,
-              "properties": {
-                "errorMessage": {
-                  "type": "string"
-                }
-              }
-            }
+          "default": {
+            "$ref": "#/responses/defaultResponse"
           }
         },
         "tags": [
