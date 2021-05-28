@@ -43,7 +43,7 @@ type IPAddress struct {
 
 	// Assigned object
 	// Read Only: true
-	AssignedObject *int64 `json:"assigned_object,omitempty"`
+	AssignedObject map[string]*string `-`
 
 	// Assigned object id
 	// Maximum: 2.147483647e+09
