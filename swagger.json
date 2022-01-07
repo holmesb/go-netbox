@@ -32479,7 +32479,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/AvailableIP"
+                "$ref": "#/definitions/IPAddress"
               }
             }
           }
@@ -33281,7 +33281,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/AvailableIP"
+                "$ref": "#/definitions/IPAddress"
               }
             }
           }
