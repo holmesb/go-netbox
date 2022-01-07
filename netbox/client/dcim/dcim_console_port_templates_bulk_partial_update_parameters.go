@@ -30,7 +30,7 @@ import (
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/fbreckle/go-netbox/netbox/models"
+	"github.com/holmesb/go-netbox/netbox/models"
 )
 
 // NewDcimConsolePortTemplatesBulkPartialUpdateParams creates a new DcimConsolePortTemplatesBulkPartialUpdateParams object,

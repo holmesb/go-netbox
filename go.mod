@@ -1,4 +1,4 @@
-module github.com/fbreckle/go-netbox
+module github.com/holmesb/go-netbox
 
 go 1.14
 

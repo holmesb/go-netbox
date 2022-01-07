@@ -32,7 +32,7 @@ import (
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 
-	"github.com/fbreckle/go-netbox/netbox/models"
+	"github.com/holmesb/go-netbox/netbox/models"
 )
 
 // UsersPermissionsListReader is a Reader for the UsersPermissionsList structure.
@@ -228,6 +228,8 @@ func (o *UsersPermissionsListOKBody) validateResults(formats strfmt.Registry) er
 			if err := o.Results[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("usersPermissionsListOK" + "." + "results" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("usersPermissionsListOK" + "." + "results" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -260,6 +262,8 @@ func (o *UsersPermissionsListOKBody) contextValidateResults(ctx context.Context,
 			if err := o.Results[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("usersPermissionsListOK" + "." + "results" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("usersPermissionsListOK" + "." + "results" + "." + strconv.Itoa(i))
 				}
 				return err
 			}

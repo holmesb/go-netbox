@@ -32,7 +32,7 @@ import (
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 
-	"github.com/fbreckle/go-netbox/netbox/models"
+	"github.com/holmesb/go-netbox/netbox/models"
 )
 
 // DcimRearPortTemplatesListReader is a Reader for the DcimRearPortTemplatesList structure.
@@ -228,6 +228,8 @@ func (o *DcimRearPortTemplatesListOKBody) validateResults(formats strfmt.Registr
 			if err := o.Results[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("dcimRearPortTemplatesListOK" + "." + "results" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("dcimRearPortTemplatesListOK" + "." + "results" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -260,6 +262,8 @@ func (o *DcimRearPortTemplatesListOKBody) contextValidateResults(ctx context.Con
 			if err := o.Results[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("dcimRearPortTemplatesListOK" + "." + "results" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("dcimRearPortTemplatesListOK" + "." + "results" + "." + strconv.Itoa(i))
 				}
 				return err
 			}

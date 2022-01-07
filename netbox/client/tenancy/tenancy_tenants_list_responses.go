@@ -32,7 +32,7 @@ import (
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 
-	"github.com/fbreckle/go-netbox/netbox/models"
+	"github.com/holmesb/go-netbox/netbox/models"
 )
 
 // TenancyTenantsListReader is a Reader for the TenancyTenantsList structure.
@@ -228,6 +228,8 @@ func (o *TenancyTenantsListOKBody) validateResults(formats strfmt.Registry) erro
 			if err := o.Results[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("tenancyTenantsListOK" + "." + "results" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("tenancyTenantsListOK" + "." + "results" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -260,6 +262,8 @@ func (o *TenancyTenantsListOKBody) contextValidateResults(ctx context.Context, f
 			if err := o.Results[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("tenancyTenantsListOK" + "." + "results" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("tenancyTenantsListOK" + "." + "results" + "." + strconv.Itoa(i))
 				}
 				return err
 			}

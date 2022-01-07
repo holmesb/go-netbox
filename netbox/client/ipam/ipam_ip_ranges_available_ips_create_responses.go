@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/fbreckle/go-netbox/netbox/models"
+	"github.com/holmesb/go-netbox/netbox/models"
 )
 
 // IpamIPRangesAvailableIpsCreateReader is a Reader for the IpamIPRangesAvailableIpsCreate structure.
@@ -66,13 +66,13 @@ func NewIpamIPRangesAvailableIpsCreateCreated() *IpamIPRangesAvailableIpsCreateC
 IpamIPRangesAvailableIpsCreateCreated ipam Ip ranges available ips create created
 */
 type IpamIPRangesAvailableIpsCreateCreated struct {
-	Payload []*models.AvailableIP
+	Payload []*models.IPAddress
 }
 
 func (o *IpamIPRangesAvailableIpsCreateCreated) Error() string {
 	return fmt.Sprintf("[POST /ipam/ip-ranges/{id}/available-ips/][%d] ipamIpRangesAvailableIpsCreateCreated  %+v", 201, o.Payload)
 }
-func (o *IpamIPRangesAvailableIpsCreateCreated) GetPayload() []*models.AvailableIP {
+func (o *IpamIPRangesAvailableIpsCreateCreated) GetPayload() []*models.IPAddress {
 	return o.Payload
 }
 

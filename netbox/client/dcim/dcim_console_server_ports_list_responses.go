@@ -32,7 +32,7 @@ import (
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 
-	"github.com/fbreckle/go-netbox/netbox/models"
+	"github.com/holmesb/go-netbox/netbox/models"
 )
 
 // DcimConsoleServerPortsListReader is a Reader for the DcimConsoleServerPortsList structure.
@@ -228,6 +228,8 @@ func (o *DcimConsoleServerPortsListOKBody) validateResults(formats strfmt.Regist
 			if err := o.Results[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("dcimConsoleServerPortsListOK" + "." + "results" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("dcimConsoleServerPortsListOK" + "." + "results" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -260,6 +262,8 @@ func (o *DcimConsoleServerPortsListOKBody) contextValidateResults(ctx context.Co
 			if err := o.Results[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("dcimConsoleServerPortsListOK" + "." + "results" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("dcimConsoleServerPortsListOK" + "." + "results" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
