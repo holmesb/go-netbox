@@ -82,6 +82,11 @@ type WritableVMInterface struct {
 	// MAC Address
 	MacAddress *string `json:"mac_address,omitempty"`
 
+	// Primary MAC address
+	//
+	// The primary MAC address object assigned to this interface.
+	PrimaryMacAddress *int64 `json:"primary_mac_address,omitempty"`
+
 	// Mode
 	// Enum: ["access","tagged","tagged-all"]
 	Mode string `json:"mode,omitempty"`

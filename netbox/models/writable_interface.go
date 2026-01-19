@@ -131,9 +131,8 @@ type WritableInterface struct {
 	// Link peers type
 	// Read Only: true
 	LinkPeersType string `json:"link_peers_type,omitempty"`
-
-	// MAC Address
-	MacAddress *string `json:"mac_address,omitempty"`
+	// Primary MAC Address
+	PrimaryMacAddress *int64 `json:"primary_mac_address,omitempty"`
 
 	// Mark connected
 	//
